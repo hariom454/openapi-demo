@@ -1,0 +1,119 @@
+openapi: 3.0.1
+info:
+  title: Sample application for openapi specs.
+  description: This document contains REST endpoint related to opeanpai spec tutorial.
+  termsOfService: https://www.sample.shashtra.com/terms
+  contact:
+    name: Sample app support
+    url: https://sample.dev-support.shashtra.com
+    email: dev-support@shashtra.com
+  version: 1.0.0
+externalDocs:
+  description: This doc contains more information related to these apis.
+  url: https://github.com/hariom454/openapi-demo/blob/master/README.md
+servers:
+- url: http://localhost:8080
+  description: Local
+- url: https://dev-sample-app.shashtra.com/v1
+  description: Dev
+tags:
+- name: Sample APIs
+  description: This collection is for sample apis for openapi tutorial.
+paths:
+  /user/search:
+    get:
+      tags:
+      - Sample APIs
+      operationId: searchUser
+      parameters:
+      - name: emailId
+        in: query
+        description: user email id.
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetUserResponse'
+      security:
+      - requestAuth: []
+  /users:
+    get:
+      tags:
+      - Sample APIs
+      description: Get All user details.
+      operationId: getAllUserDetails
+      responses:
+        "200":
+          description: Request succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUserResponse'
+        "400":
+          description: Bad Request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - requestAuth: []
+    post:
+      tags:
+      - Sample APIs
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Userdata'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateUserResponse'
+      security:
+      - requestAuth: []
+  /users/{userId}:
+    get:
+      tags:
+      - Sample APIs
+      operationId: getUserDetails
+      parameters:
+      - name: userId
+        in: path
+        description: userId to get user details.
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetUserResponse'
+      security:
+      - requestAuth: []
+components:
+  schemas:
+    CreateUserResponse:
+      type: object
+    ErrorResponse:
+      type: object
+    GetUserResponse:
+      type: object
+    Userdata:
+      type: object
+  securitySchemes:
+    requestAuth:
+      type: apiKey
+      name: Authorization
+      in: header

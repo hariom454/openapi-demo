@@ -1,0 +1,6 @@
+springdoc:
+  api-docs:
+    path: /openapi
+
+  writer-with-order-by-keys: true
+  override-with-generic-response: false
