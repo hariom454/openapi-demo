@@ -53,7 +53,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetUserResponse'
+                $ref: '#/components/schemas/ListUsers'
         "400":
           description: Bad Request.
           content:
@@ -106,12 +106,49 @@ components:
   schemas:
     CreateUserResponse:
       type: object
+      properties:
+        emailAddress:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        userId:
+          type: string
     ErrorResponse:
       type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     GetUserResponse:
       type: object
+      properties:
+        emailAddress:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        userId:
+          type: string
+    ListUsers:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetUserResponse'
     Userdata:
       type: object
+      properties:
+        emailAddress:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
   securitySchemes:
     requestAuth:
       type: apiKey

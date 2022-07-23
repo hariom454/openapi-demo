@@ -3,6 +3,7 @@ package com.shashtra.openapidemo.controller.impl;
 import com.shashtra.openapidemo.controller.SampleController;
 import com.shashtra.openapidemo.controller.data.CreateUserResponse;
 import com.shashtra.openapidemo.controller.data.GetUserResponse;
+import com.shashtra.openapidemo.controller.data.ListUsers;
 import com.shashtra.openapidemo.controller.request.Userdata;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SampleControllerImpl implements SampleController {
   // TODO: implement methods to get sample data
   @Override
-  public GetUserResponse getAllUserDetails() {
+  public ListUsers getAllUserDetails() {
     return null;
   }
 

@@ -1,13 +1,14 @@
 package com.shashtra.openapidemo.controller.data;
 
-import com.shashtra.openapidemo.controller.request.Userdata;
 import lombok.Data;
+
+import java.util.List;
 
 /***************
  **  author: Hariom
  **  since: 23/07/22
  *****************/
 @Data
-public class GetUserResponse extends Userdata {
-  private String userId;
+public class ListUsers {
+    List<GetUserResponse> users;
 }

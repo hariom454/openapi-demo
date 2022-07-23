@@ -2,6 +2,7 @@ package com.shashtra.openapidemo.controller;
 
 import com.shashtra.openapidemo.controller.data.CreateUserResponse;
 import com.shashtra.openapidemo.controller.data.GetUserResponse;
+import com.shashtra.openapidemo.controller.data.ListUsers;
 import com.shashtra.openapidemo.controller.request.Userdata;
 import com.shashtra.openapidemo.error.ErrorResponse;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
@@ -64,7 +65,7 @@ public interface SampleController {
             content =
                 @Content(
                     mediaType = "application/json",
-                    schema = @Schema(implementation = GetUserResponse.class))),
+                    schema = @Schema(implementation = ListUsers.class))),
         @ApiResponse(
             description = "Bad Request.",
             responseCode = "400",
@@ -74,7 +75,7 @@ public interface SampleController {
                     schema = @Schema(implementation = ErrorResponse.class)))
       })
   @GetMapping(value = "/users")
-  GetUserResponse getAllUserDetails();
+  ListUsers getAllUserDetails();
 
   @GetMapping(value = "/users/{userId}")
   GetUserResponse getUserDetails(
