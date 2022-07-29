@@ -1,5 +1,6 @@
 package com.shashtra.openapidemo.controller.request;
 
+import com.shashtra.openapidemo.dto.User;
 import lombok.Data;
 
 /***************
@@ -7,9 +8,6 @@ import lombok.Data;
  **  since: 23/07/22
  *****************/
 @Data
-public class Userdata {
-  private String firstName;
-  private String lastName;
+public class CreateUserRequest extends User {
 
-  private String emailAddress;
 }

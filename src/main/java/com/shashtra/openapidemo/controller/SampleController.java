@@ -1,9 +1,7 @@
 package com.shashtra.openapidemo.controller;
 
-import com.shashtra.openapidemo.controller.data.CreateUserResponse;
-import com.shashtra.openapidemo.controller.data.GetUserResponse;
-import com.shashtra.openapidemo.controller.data.ListUsers;
-import com.shashtra.openapidemo.controller.request.Userdata;
+import com.shashtra.openapidemo.controller.request.CreateUserRequest;
+import com.shashtra.openapidemo.dto.User;
 import com.shashtra.openapidemo.error.ErrorResponse;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -13,6 +11,7 @@ import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -22,6 +21,8 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.servers.Server;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /***************
  **  author: Hariom
@@ -65,7 +66,7 @@ public interface SampleController {
             content =
                 @Content(
                     mediaType = "application/json",
-                    schema = @Schema(implementation = ListUsers.class))),
+                    array = @ArraySchema(schema = @Schema(implementation = User.class)))),
         @ApiResponse(
             description = "Bad Request.",
             responseCode = "400",
@@ -75,17 +76,16 @@ public interface SampleController {
                     schema = @Schema(implementation = ErrorResponse.class)))
       })
   @GetMapping(value = "/users")
-  ListUsers getAllUserDetails();
+  List<User> getAllUserDetails();
 
   @GetMapping(value = "/users/{userId}")
-  GetUserResponse getUserDetails(
+  User getUserDetails(
       @Parameter(description = "userId to get user details.") @PathVariable(value = "userId")
           String userId);
 
   @GetMapping(value = "/user/search")
-  GetUserResponse searchUser(
-      @Parameter(description = "user email id.") @RequestParam String emailId);
+  User searchUser(@Parameter(description = "user email id.") @RequestParam String emailId);
 
   @PostMapping(value = "/users")
-  CreateUserResponse createUser(@RequestBody Userdata createUserRequest);
+  User createUser(@RequestBody CreateUserRequest createUserRequest);
 }

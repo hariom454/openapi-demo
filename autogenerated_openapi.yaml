@@ -38,7 +38,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/GetUserResponse'
+                $ref: '#/components/schemas/User'
       security:
       - requestAuth: []
   /users:
@@ -53,7 +53,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListUsers'
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
         "400":
           description: Bad Request.
           content:
@@ -70,7 +72,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Userdata'
+              $ref: '#/components/schemas/CreateUserRequest'
         required: true
       responses:
         "200":
@@ -78,7 +80,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/CreateUserResponse'
+                $ref: '#/components/schemas/User'
       security:
       - requestAuth: []
   /users/{userId}:
@@ -99,12 +101,12 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/GetUserResponse'
+                $ref: '#/components/schemas/User'
       security:
       - requestAuth: []
 components:
   schemas:
-    CreateUserResponse:
+    CreateUserRequest:
       type: object
       properties:
         emailAddress:
@@ -115,6 +117,7 @@ components:
           type: string
         userId:
           type: string
+          readOnly: true
     ErrorResponse:
       type: object
       properties:
@@ -122,7 +125,7 @@ components:
           type: string
         message:
           type: string
-    GetUserResponse:
+    User:
       type: object
       properties:
         emailAddress:
@@ -133,22 +136,7 @@ components:
           type: string
         userId:
           type: string
-    ListUsers:
-      type: object
-      properties:
-        users:
-          type: array
-          items:
-            $ref: '#/components/schemas/GetUserResponse'
-    Userdata:
-      type: object
-      properties:
-        emailAddress:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
+          readOnly: true
   securitySchemes:
     requestAuth:
       type: apiKey

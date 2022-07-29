@@ -1,11 +1,11 @@
 package com.shashtra.openapidemo.controller.impl;
 
 import com.shashtra.openapidemo.controller.SampleController;
-import com.shashtra.openapidemo.controller.data.CreateUserResponse;
-import com.shashtra.openapidemo.controller.data.GetUserResponse;
-import com.shashtra.openapidemo.controller.data.ListUsers;
-import com.shashtra.openapidemo.controller.request.Userdata;
+import com.shashtra.openapidemo.controller.request.CreateUserRequest;
+import com.shashtra.openapidemo.dto.User;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /***************
  **  author: Hariom
@@ -15,22 +15,22 @@ import org.springframework.web.bind.annotation.RestController;
 public class SampleControllerImpl implements SampleController {
   // TODO: implement methods to get sample data
   @Override
-  public ListUsers getAllUserDetails() {
+  public List<User> getAllUserDetails() {
     return null;
   }
 
   @Override
-  public GetUserResponse getUserDetails(String userId) {
+  public User getUserDetails(String userId) {
     return null;
   }
 
   @Override
-  public GetUserResponse searchUser(String emailId) {
+  public User searchUser(String emailId) {
     return null;
   }
 
   @Override
-  public CreateUserResponse createUser(Userdata createUserRequest) {
+  public User createUser(CreateUserRequest createUserRequest) {
     return null;
   }
 }
