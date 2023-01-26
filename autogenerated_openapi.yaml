@@ -1,72 +1,70 @@
 openapi: 3.0.1
 info:
-  title: Sample application for openapi specs.
-  description: This document contains REST endpoint related to opeanpai spec tutorial.
-  termsOfService: https://www.sample.shashtra.com/terms
   contact:
+    email: dev-support@shashtra.com
     name: Sample app support
     url: https://sample.dev-support.shashtra.com
-    email: dev-support@shashtra.com
+  description: This document contains REST endpoint related to opeanpai spec tutorial.
+  termsOfService: https://www.sample.shashtra.com/terms
+  title: Sample application for openapi specs.
   version: 1.0.0
 externalDocs:
   description: This doc contains more information related to these apis.
   url: https://github.com/hariom454/openapi-demo/blob/master/README.md
 servers:
-- url: http://localhost:8080
-  description: Local
-- url: https://dev-sample-app.shashtra.com/v1
-  description: Dev
+- description: Local
+  url: http://localhost:8080
+- description: Dev
+  url: https://dev-sample-app.shashtra.com/v1
 tags:
-- name: Sample APIs
-  description: This collection is for sample apis for openapi tutorial.
+- description: This collection is for sample apis for openapi tutorial.
+  name: Sample APIs
 paths:
   /user/search:
     get:
-      tags:
-      - Sample APIs
       operationId: searchUser
       parameters:
-      - name: emailId
+      - description: user email id.
         in: query
-        description: user email id.
+        name: emailId
         required: true
         schema:
           type: string
       responses:
         "200":
-          description: OK
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/User'
+          description: OK
       security:
       - requestAuth: []
-  /users:
-    get:
       tags:
       - Sample APIs
+  /users:
+    get:
       description: Get All user details.
       operationId: getAllUserDetails
       responses:
         "200":
-          description: Request succeeded.
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/User'
+          description: Request succeeded.
         "400":
-          description: Bad Request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request.
       security:
       - requestAuth: []
-    post:
       tags:
       - Sample APIs
+    post:
       operationId: createUser
       requestBody:
         content:
@@ -76,34 +74,36 @@ paths:
         required: true
       responses:
         "200":
-          description: OK
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/User'
+          description: OK
       security:
       - requestAuth: []
-  /users/{userId}:
-    get:
       tags:
       - Sample APIs
+  /users/{userId}:
+    get:
       operationId: getUserDetails
       parameters:
-      - name: userId
+      - description: userId to get user details.
         in: path
-        description: userId to get user details.
+        name: userId
         required: true
         schema:
           type: string
       responses:
         "200":
-          description: OK
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/User'
+          description: OK
       security:
       - requestAuth: []
+      tags:
+      - Sample APIs
 components:
   schemas:
     CreateUserRequest:
@@ -139,6 +139,6 @@ components:
           readOnly: true
   securitySchemes:
     requestAuth:
-      type: apiKey
-      name: Authorization
       in: header
+      name: Authorization
+      type: apiKey
